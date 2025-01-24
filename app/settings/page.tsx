@@ -17,7 +17,7 @@ import { Bell, Eye, Keyboard } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function SettingsPage() {
-  const { darkMode, toggleDarkMode } = useAppStore()
+  const { theme, setTheme } = useAppStore()
 
   return (
     <ScrollArea className="h-[calc(100vh-4rem)]">
@@ -44,9 +44,9 @@ export default function SettingsPage() {
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={toggleDarkMode}
+                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                   >
-                    {darkMode ? (
+                    {theme === 'dark' ? (
                       <Sun className="h-5 w-5" />
                     ) : (
                       <Moon className="h-5 w-5" />

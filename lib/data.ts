@@ -7,6 +7,7 @@ export interface Tool {
   tags?: string[]
   features?: string[]
   favicon?: string
+
 }
 
 export const tools: Tool[] = [

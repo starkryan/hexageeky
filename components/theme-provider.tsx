@@ -16,13 +16,36 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Update theme
   useEffect(() => {
     const root = document.documentElement
-    if (theme === 'dark') {
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    const activeTheme = theme === 'system' ? systemTheme : theme
+
+    if (activeTheme === 'dark') {
       root.classList.add('dark')
       root.style.setProperty('color-scheme', 'dark')
     } else {
       root.classList.remove('dark')
       root.style.setProperty('color-scheme', 'light')
     }
+  }, [theme])
+
+  // Watch for system theme changes
+  useEffect(() => {
+    if (theme !== 'system') return
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = () => {
+      const root = document.documentElement
+      if (mediaQuery.matches) {
+        root.classList.add('dark')
+        root.style.setProperty('color-scheme', 'dark')
+      } else {
+        root.classList.remove('dark')
+        root.style.setProperty('color-scheme', 'light')
+      }
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
   }, [theme])
 
   // Prevent hydration mismatch

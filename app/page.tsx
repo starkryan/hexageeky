@@ -102,8 +102,8 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
-  const observer = useRef<IntersectionObserver>();
-  const scrollPositionRef = useRef(0);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const scrollPositionRef = useRef<number>(0);
   const [showSplash, setShowSplash] = useState(true);
 
   // Debounced search query
