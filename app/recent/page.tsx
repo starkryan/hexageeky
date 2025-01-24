@@ -50,7 +50,7 @@ export default function RecentPage() {
         text: tool.description,
         url: tool.url,
       })
-    } catch (err) {
+    } catch {
       navigator.clipboard.writeText(tool.url)
       toast.success('Link copied to clipboard')
     }
